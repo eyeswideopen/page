@@ -1,8 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import { OPERATOR } from '../legal';
 ---
 
-<Base title="Impressum" description="Impressum (Anbieterkennzeichnung).">
+<Base title="Impressum" description="Impressum von eyeswideopen.dev." lang="de">
 	<h1>Impressum</h1>
-	<p><strong>TODO:</strong> Angaben gemäß § 5 DDG einfügen (Name, ladungsfähige Anschrift, Kontakt). Bitte selbst ausfüllen bzw. rechtlich prüfen lassen.</p>
+
+	<h2>Angaben gemäß § 5 DDG</h2>
+	<p>
+		{OPERATOR.name}<br />
+		{OPERATOR.street}<br />
+		{OPERATOR.city}<br />
+		{OPERATOR.country}
+	</p>
+	<p>E-Mail: {OPERATOR.email}</p>
+
+	<h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+	<p>{OPERATOR.name}, Anschrift wie oben.</p>
 </Base>
