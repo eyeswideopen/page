@@ -1,6 +1,6 @@
 # eyes wide open
 
-Personal dev blog at <https://eyeswideopen.dev>. Static [Astro](https://astro.build) site with no client-side JavaScript, deployed to GitHub Pages.
+Personal dev blog at <https://eyeswideopen.dev>. Static [Astro](https://astro.build) site with no client-side JavaScript, deployed to GitHub Pages. Set in [Urbanist](https://fonts.google.com/specimen/Urbanist), self-hosted via `@fontsource-variable/urbanist`.
 
 ## Writing a post
 
@@ -47,7 +47,7 @@ src/
   content/posts/      posts (Markdown)
   content.config.ts   post schema
   layouts/Base.astro  shared layout: <head>, SEO/Open Graph tags, header, footer
-  pages/              home, post pages, about, impressum, datenschutz, rss.xml
+  pages/              landing page, blog (post list), post pages, about, impressum, datenschutz, rss.xml
   styles/global.css   the only stylesheet (inlined into each page at build time)
   consts.ts           site title and description
 ```

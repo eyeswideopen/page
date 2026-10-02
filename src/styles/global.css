@@ -1,21 +1,23 @@
 :root {
-	--bg: #fdfdfc;
-	--fg: #1c1c1c;
-	--muted: #6b6b6b;
-	--accent: #0b57d0;
-	--border: #e3e3e0;
-	--code-bg: #f4f4f2;
+	--bg: #f5f4f0;
+	--fg: #25232a;
+	--muted: #6e6b72;
+	--accent: #25232a;
+	--border: #dedcd5;
+	--code-bg: #ebe9e3;
+	--sans: 'Urbanist Variable', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	--mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 	color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--bg: #121314;
-		--fg: #e6e6e3;
-		--muted: #9a9a96;
-		--accent: #8ab4f8;
-		--border: #2b2c2e;
-		--code-bg: #1b1c1e;
+		--bg: #18171b;
+		--fg: #ecebe6;
+		--muted: #9b98a0;
+		--accent: #ecebe6;
+		--border: #2e2c33;
+		--code-bg: #222127;
 	}
 
 	.astro-code,
@@ -36,28 +38,39 @@ html {
 }
 
 body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-height: 100svh;
 	margin: 0 auto;
 	max-width: 65ch;
-	padding: 2rem 1.25rem 3rem;
+	padding: 2rem 1.25rem 1.5rem;
 	background: var(--bg);
 	color: var(--fg);
-	font: 1.0625rem/1.65 system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	font: 500 1.125rem/1.6 var(--sans);
+}
+
+main {
+	flex: 1;
 }
 
 a {
 	color: var(--accent);
-	text-underline-offset: 0.15em;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
 }
 
 h1,
 h2,
 h3 {
-	line-height: 1.25;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
 	margin: 2rem 0 0.75rem;
 }
 
 h1 {
-	font-size: 1.75rem;
+	font-size: 2.5rem;
 	margin-top: 0;
 }
 
@@ -81,20 +94,80 @@ img {
 
 .site-name {
 	color: var(--fg);
-	font-weight: 600;
+	font-size: 1.375rem;
+	font-weight: 800;
+	letter-spacing: -0.03em;
 	text-decoration: none;
 }
 
+.site-header nav {
+	display: flex;
+	gap: 1.5rem;
+}
+
 .site-header nav a,
-.site-footer a {
-	color: var(--muted);
+.hero-nav a {
+	color: var(--fg);
+	text-decoration: none;
+}
+
+.site-header nav a:hover,
+.hero-nav a:hover {
+	text-decoration: underline;
 }
 
 .site-footer {
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0 0.6rem;
 	margin-top: 4rem;
-	padding-top: 1rem;
-	border-top: 1px solid var(--border);
-	font-size: 0.875rem;
+	font: 0.8125rem/1.8 var(--mono);
+}
+
+.site-footer > * + *::before {
+	content: '·';
+	margin-right: 0.6rem;
+	color: var(--muted);
+}
+
+.site-footer a {
+	color: var(--fg);
+	text-decoration: none;
+}
+
+.site-footer a:hover {
+	text-decoration: underline;
+}
+
+/* Landing page */
+body.bare {
+	max-width: 60rem;
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: clamp(1rem, 6vh, 4rem);
+}
+
+.wordmark {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 0;
+	font-size: clamp(3.5rem, 26vw, 11rem);
+	font-weight: 800;
+	line-height: 0.82;
+	letter-spacing: -0.055em;
+}
+
+.hero-nav {
+	display: flex;
+	gap: 2.25rem;
+	margin-top: 2.5rem;
+	font-size: 1.375rem;
+	font-weight: 400;
 }
 
 /* Post list */
@@ -131,7 +204,7 @@ img {
 /* Prose */
 code,
 pre {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+	font-family: var(--mono);
 	font-size: 0.875em;
 }
 

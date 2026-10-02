@@ -1,5 +1,7 @@
 ---
+import '@fontsource-variable/urbanist/wght.css';
 import '../styles/global.css';
+import urbanist from '@fontsource-variable/urbanist/files/urbanist-latin-wght-normal.woff2?url';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 interface Props {
@@ -8,9 +10,11 @@ interface Props {
 	type?: 'website' | 'article';
 	publishedTime?: Date;
 	modifiedTime?: Date;
+	/** Landing page: no header, the page brings its own big title. */
+	bare?: boolean;
 }
 
-const { title, description = SITE_DESCRIPTION, type = 'website', publishedTime, modifiedTime } = Astro.props;
+const { title, description = SITE_DESCRIPTION, type = 'website', publishedTime, modifiedTime, bare = false } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -24,6 +28,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 		<title>{fullTitle}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
+		<link rel="preload" href={urbanist} as="font" type="font/woff2" crossorigin />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -38,18 +43,29 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 		{modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
 		<meta name="twitter:card" content="summary" />
 	</head>
-	<body>
-		<header class="site-header">
-			<a class="site-name" href="/">{SITE_TITLE}</a>
-			<nav><a href="/about/">About</a></nav>
-		</header>
+	<body class:list={{ bare }}>
+		{
+			!bare && (
+				<header class="site-header">
+					<a class="site-name" href="/">{SITE_TITLE}</a>
+					<nav>
+						<a href="/about/">about</a>
+						<a href="/blog/">blog</a>
+					</nav>
+				</header>
+			)
+		}
 		<main>
 			<slot />
 		</main>
 		<footer class="site-footer">
-			<a href="/impressum/">Impressum</a>
-			<a href="/datenschutz/">Datenschutz</a>
-			<a href="/rss.xml">RSS</a>
+			<span>© {new Date().getFullYear()} eyeswideopen.dev</span>
+			<a href="/">home</a>
+			<a href="/about/">about</a>
+			<a href="/blog/">blog</a>
+			<a href="/impressum/">impressum</a>
+			<a href="/datenschutz/">datenschutz</a>
+			<a href="/rss.xml">rss</a>
 		</footer>
 	</body>
 </html>

@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPosts, formatDate } from '../lib/posts';
+
+const posts = await getPosts();
+---
+
+<Base title="Blog" description="All posts, newest first.">
+	<h1>blog</h1>
+	<ul class="post-list">
+		{
+			posts.map((post) => (
+				<li>
+					<time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+					<a href={`/posts/${post.id}/`}>{post.data.title}</a>
+					{post.data.draft && <span class="draft">draft</span>}
+				</li>
+			))
+		}
+	</ul>
+</Base>
